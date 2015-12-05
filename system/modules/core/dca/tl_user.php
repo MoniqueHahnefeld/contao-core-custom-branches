@@ -179,7 +179,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => System::getLanguages(true),
-			'eval'                    => array('rgxp'=>'locale', 'tl_class'=>'w50'),
+			'eval'                    => array( 'tl_class'=>'w50'), //'rgxp'=>'locale',
 			'sql'                     => "varchar(5) NOT NULL default ''"
 		),
 		'backendTheme' => array

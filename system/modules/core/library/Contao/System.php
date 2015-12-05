@@ -263,9 +263,8 @@ abstract class System
 	{
 		if ($strLanguage === null)
 		{
-			$strLanguage = str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
+			$strLanguage = $GLOBALS['TL_LANGUAGE']; //str_replace('-', '_', $GLOBALS['TL_LANGUAGE']);
 		}
-
 		// Fall back to English
 		if ($strLanguage == '')
 		{
@@ -279,6 +278,8 @@ abstract class System
 		}
 
 		$strCacheKey = $strLanguage;
+
+
 
 		// Make sure the language exists
 		if (!static::isInstalledLanguage($strLanguage))
@@ -431,7 +432,7 @@ abstract class System
 
 		foreach ($languages as $strKey=>$strName)
 		{
-			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
+			$arrAux[$strKey] = !isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
 		}
 
 		asort($arrAux);
@@ -439,17 +440,17 @@ abstract class System
 
 		foreach (array_keys($arrAux) as $strKey)
 		{
-			if ($blnInstalledOnly && !in_array($strKey, $arrBackendLanguages))
-			{
-				continue;
-			}
+			// if ($blnInstalledOnly && !in_array($strKey, $arrBackendLanguages))
+			// {
+			// 	continue;
+			// }
 
 			$return[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
 
-			if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
-			{
-				$return[$strKey] .= ' - ' . $langsNative[$strKey];
-			}
+			// if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
+			// {
+			// 	$return[$strKey] .= ' - ' . $langsNative[$strKey];
+			// }
 		}
 
 		// HOOK: add custom logic

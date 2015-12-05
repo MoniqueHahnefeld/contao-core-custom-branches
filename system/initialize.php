@@ -186,7 +186,7 @@ if (!isset($_SESSION['TL_LANGUAGE']))
 
 	foreach ($langs as $lang)
 	{
-		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . str_replace('-', '_', $lang)))
+		if (is_dir(TL_ROOT . '/system/modules/core/languages/' . $lang)) //str_replace('-', '_', $lang)
 		{
 			$_SESSION['TL_LANGUAGE'] = $lang;
 			break;
